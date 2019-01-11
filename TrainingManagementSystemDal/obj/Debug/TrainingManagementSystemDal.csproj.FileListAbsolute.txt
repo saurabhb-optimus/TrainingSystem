@@ -1,0 +1,10 @@
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\bin\Debug\TrainingManagementSystemDal.dll.config
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\bin\Debug\TrainingManagementSystemDal.dll
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\bin\Debug\TrainingManagementSystemDal.pdb
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\bin\Debug\EntityFramework.dll
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\bin\Debug\EntityFramework.xml
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\obj\Debug\TrainingManagementSystemDal.csprojResolveAssemblyReference.cache
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\obj\Debug\TrainingManagementSystemDal.dll
+c:\users\swati.sharma\documents\visual studio 2015\Projects\TrainingManagementSystemSS\TrainingManagementSystemDal\obj\Debug\TrainingManagementSystemDal.pdb

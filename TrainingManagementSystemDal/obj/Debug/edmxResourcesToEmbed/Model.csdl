@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SwatiTmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Batch">
+    <Key>
+      <PropertyRef Name="BatchId" />
+    </Key>
+    <Property Name="BatchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BatchCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BatchCapacity" Type="Int32" />
+    <Property Name="CourseId" Type="Int32" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Course" Relationship="Self.fk" FromRole="Batch" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseName" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseStatus" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CourseDuration" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Batches" Relationship="Self.fk" FromRole="Course" ToRole="Batch" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="JoinDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+    <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="0" />
+    <Property Name="UserManager" Type="Int32" />
+    <NavigationProperty Name="Users1" Relationship="SwatiTmsModel.ManagerFk" FromRole="User" ToRole="User1" />
+    <NavigationProperty Name="User1" Relationship="SwatiTmsModel.ManagerFk" FromRole="User1" ToRole="User" />
+  </EntityType>
+  <Association Name="fk">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="Batch">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SwatiTmsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Batches" EntityType="Self.Batch" />
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="fk" Association="Self.fk">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Batch" EntitySet="Batches" />
+    </AssociationSet>
+    <FunctionImport Name="usp_Batch_getBatch" EntitySet="Batches" ReturnType="Collection(SwatiTmsModel.Batch)" />
+    <FunctionImport Name="usp_Batch_InsertBatch">
+      <Parameter Name="BatchCode" Mode="In" Type="String" />
+      <Parameter Name="BatchCapacity" Mode="In" Type="Int32" />
+      <Parameter Name="CourseId" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Batch_UpdateBatch">
+      <Parameter Name="BatchCode" Mode="In" Type="String" />
+      <Parameter Name="BatchCapacity" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Course_Delete">
+      <Parameter Name="CourseId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Course_DisplayById" ReturnType="Collection(SwatiTmsModel.usp_Course_DisplayById_Result)">
+      <Parameter Name="CourseId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Course_getCourse" EntitySet="Courses" ReturnType="Collection(SwatiTmsModel.Course)" />
+    <FunctionImport Name="usp_Course_InsertCourse">
+      <Parameter Name="CourseCode" Mode="In" Type="String" />
+      <Parameter Name="CourseName" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="String" />
+      <Parameter Name="CourseDuration" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Course_UpdateCourseRecord">
+      <Parameter Name="CourseId" Mode="In" Type="Int32" />
+      <Parameter Name="CourseName" Mode="In" Type="String" />
+      <Parameter Name="CourseStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="CourseDuration" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Batch_DeleteBatch">
+      <Parameter Name="BatchId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="ManagerFk" Association="SwatiTmsModel.ManagerFk">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User1" EntitySet="Users" />
+    </AssociationSet>
+    <FunctionImport Name="usp_Users_getUser" EntitySet="Users" ReturnType="Collection(SwatiTmsModel.User)" />
+    <FunctionImport Name="usp_User_InsertUser">
+      <Parameter Name="UserCode" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="UserEmail" Mode="In" Type="String" />
+      <Parameter Name="UserPassword" Mode="In" Type="String" />
+      <Parameter Name="Role" Mode="In" Type="String" />
+      <Parameter Name="joinDate" Mode="In" Type="DateTime" />
+      <Parameter Name="UserManager" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedBy" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_User_DeleteUser">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_User_UpdateUser">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="UserEmail" Mode="In" Type="String" />
+      <Parameter Name="UserPassword" Mode="In" Type="String" />
+      <Parameter Name="Role" Mode="In" Type="String" />
+      <Parameter Name="JoinDate" Mode="In" Type="DateTime" />
+      <Parameter Name="UserManager" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_login">
+      <Parameter Name="UserEmail" Mode="In" Type="String" />
+      <Parameter Name="UserPassword" Mode="In" Type="String" />
+      <Parameter Name="found" Mode="InOut" Type="String" />
+      <Parameter Name="Role" Mode="InOut" Type="String" />
+      <Parameter Name="UserName" Mode="InOut" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="usp_Batch_getBatch_Result">
+    <Property Type="Int32" Name="BatchId" Nullable="false" />
+    <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="4" />
+    <Property Type="Int32" Name="BatchCapacity" Nullable="true" />
+    <Property Type="Int32" Name="CourseId" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+    <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_Course_DisplayById_Result">
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="String" Name="CourseCode" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="24" />
+    <Property Type="Boolean" Name="CourseStatus" Nullable="true" />
+    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CourseDuration" Nullable="false" />
+    <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_Course_getCourse_Result">
+    <Property Type="Int32" Name="CourseId" Nullable="false" />
+    <Property Type="String" Name="CourseCode" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="CourseName" Nullable="false" MaxLength="24" />
+    <Property Type="Boolean" Name="CourseStatus" Nullable="true" />
+    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="CourseDuration" Nullable="false" />
+    <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="23" />
+  </ComplexType>
+  <Association Name="ManagerFk">
+    <End Type="SwatiTmsModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="SwatiTmsModel.User" Role="User1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="UserManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="usp_Users_getUser_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="UserCode" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="UserPassword" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Role" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="JoinDate" Nullable="true" />
+    <Property Type="Int32" Name="UserManager" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="true" />
+    <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="20" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="30" />
+    <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
+  </ComplexType>
+</Schema>

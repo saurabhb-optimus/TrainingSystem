@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SwatiTmsModelStoreContainer" CdmEntityContainer="SwatiTmsEntities">
+    <EntitySetMapping Name="Batches">
+      <EntityTypeMapping TypeName="SwatiTmsModel.Batch">
+        <MappingFragment StoreEntitySet="Batch">
+          <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+          <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
+          <ScalarProperty Name="BatchCapacity" ColumnName="BatchCapacity" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="SwatiTmsModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+          <ScalarProperty Name="CourseStatus" ColumnName="CourseStatus" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CourseDuration" ColumnName="CourseDuration" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SwatiTmsModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserManager" ColumnName="UserManager" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_Batch_getBatch" FunctionName="SwatiTmsModel.Store.usp_Batch_getBatch" />
+    <FunctionImportMapping FunctionImportName="usp_Batch_InsertBatch" FunctionName="SwatiTmsModel.Store.usp_Batch_InsertBatch" />
+    <FunctionImportMapping FunctionImportName="usp_Batch_UpdateBatch" FunctionName="SwatiTmsModel.Store.usp_Batch_UpdateBatch" />
+    <FunctionImportMapping FunctionImportName="usp_Course_Delete" FunctionName="SwatiTmsModel.Store.usp_Course_Delete" />
+    <FunctionImportMapping FunctionImportName="usp_Course_DisplayById" FunctionName="SwatiTmsModel.Store.usp_Course_DisplayById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SwatiTmsModel.usp_Course_DisplayById_Result">
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+          <ScalarProperty Name="CourseStatus" ColumnName="CourseStatus" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CourseDuration" ColumnName="CourseDuration" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Course_getCourse" FunctionName="SwatiTmsModel.Store.usp_Course_getCourse" />
+    <FunctionImportMapping FunctionImportName="usp_Course_InsertCourse" FunctionName="SwatiTmsModel.Store.usp_Course_InsertCourse" />
+    <FunctionImportMapping FunctionImportName="usp_Course_UpdateCourseRecord" FunctionName="SwatiTmsModel.Store.usp_Course_UpdateCourseRecord" />
+    <FunctionImportMapping FunctionImportName="usp_Batch_DeleteBatch" FunctionName="SwatiTmsModel.Store.usp_Batch_DeleteBatch" />
+    <FunctionImportMapping FunctionImportName="usp_Users_getUser" FunctionName="SwatiTmsModel.Store.usp_Users_getUser" />
+    <FunctionImportMapping FunctionImportName="usp_User_InsertUser" FunctionName="SwatiTmsModel.Store.usp_User_InsertUser" />
+    <FunctionImportMapping FunctionImportName="usp_User_DeleteUser" FunctionName="SwatiTmsModel.Store.usp_User_DeleteUser" />
+    <FunctionImportMapping FunctionImportName="usp_User_UpdateUser" FunctionName="SwatiTmsModel.Store.usp_User_UpdateUser" />
+    <FunctionImportMapping FunctionImportName="usp_login" FunctionName="SwatiTmsModel.Store.usp_login" />
+  </EntityContainerMapping>
+</Mapping>
